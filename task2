@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <math.h>
+
+struct Distance
+{
+  int x;
+  int y;
+};
+struct Rectangle
+{
+  struct Distance bottomLeft;
+  struct Distance topRight;
+};
+void calculateDistance(struct Distance p, struct Distance p1)
+{
+  int s = (p1.x - p.x) * (p1.x - p.x) + (p1.y - p.y) * (p1.y - p.y);
+  double d = sqrt(s);
+  printf("The distance between the points is: %.2f\n", d);
+}
+void isPointInRectangle(struct Distance p2, struct Rectangle rect)
+{
+  if (p2.x >= rect.bottomLeft.x && p2.x <= rect.topRight.x &&
+      p2.y >= rect.bottomLeft.y && p2.y <= rect.topRight.y)
+  {
+    printf("The point (%d, %d) lies within the rectangle.\n", p2.x, p2.y);
+  }
+  else
+  {
+    printf("The point (%d, %d) is outside the rectangle.\n", p2.x, p2.y);
+  }
+}
+
+int main()
+{
+  struct Distance p, p1, p2;
+  struct Rectangle rect;
+  printf("Enter Point x1: ");
+  scanf("%d", &p.x);
+  printf("\nEnter Point y1: ");
+  scanf("%d", &p.y);
+  printf("\nEnter Point x2: ");
+  scanf("%d", &p1.x);
+  printf("\nEnter Point y2: ");
+  scanf("%d", &p1.y);
+  calculateDistance(p, p1);
+  printf("\nEnter bottom-left corner of the rectangle (x1 y1): ");
+  scanf("%d %d", &rect.bottomLeft.x, &rect.bottomLeft.y);
+  printf("Enter top-right corner of the rectangle (x2 y2): ");
+  scanf("%d %d", &rect.topRight.x, &rect.topRight.y);
+  printf("Enter the point to check (x y): ");
+  scanf("%d %d", &p2.x, &p2.y);
+  isPointInRectangle(p2, rect);
+
+  return 0;
+}
