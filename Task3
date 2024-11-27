@@ -1,0 +1,30 @@
+#include<stdio.h>
+#define MAX_CELSIUS 150
+int compare(float celsius){
+static int count=0;
+if(celsius<=150){
+    count++;
+}else{
+count++;
+printf("The Function Exceeded the limit %f\n",celsius);
+}
+return count;
+}
+int main(){
+    float farheniet,celsius;
+    int count1;
+for(int i=0;i<4;i++){
+    printf("Enter Temperature in Farheniet to check: ");
+    scanf("%f",&farheniet);
+celsius = (farheniet - 32) * 5.0 / 9.0;
+ count1=compare(celsius);
+}
+printf("\nThe Total number of times the function has been called is %d",count1);
+
+
+
+//  printf("\nEnter Temperature in kelvin to check: ");
+//    scanf("%d",&kelvin);
+//    celsius1=kelvin-273.15;
+
+}
