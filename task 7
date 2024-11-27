@@ -1,0 +1,18 @@
+#include<stdio.h>
+#define METER_TO_KILOMETER 0.001;
+
+int meterstokilometers(int meters){
+    int static count=0;
+    count++;
+printf("Function has been called %d times",count);
+return meters*METER_TO_KILOMETER;
+}
+int main(){
+int meters;
+printf("Enter Distance in Meters: ");
+scanf("%d",&meters);
+printf("\nMeters into Kilometers is %d\n",meterstokilometers(meters));
+printf("\nMeters into Kilometers is %d\n",meterstokilometers(meters));
+printf("\nMeters into Kilometers is %d\n",meterstokilometers(meters));
+return 0;
+}
