@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <string.h>
+
+struct details {
+    char make_model_varient[100];
+    int year;
+    int mileage;
+    int price;
+};
+
+
+void display(struct details cars[], int size);
+void Insert(struct details cars[], int *size);
+void search(struct details cars[], int size);
+
+int main() {
+    int size = 4;
+    struct details cars[100];
+
+    strcpy(cars[0].make_model_varient, "Toyota Camry XLE");
+    cars[0].year = 2020;
+    cars[0].price = 3000000;
+    cars[0].mileage = 15000;
+
+    strcpy(cars[1].make_model_varient, "Honda Civic Sport");
+    cars[1].year = 2021;
+    cars[1].price = 3500000;
+    cars[1].mileage = 12000;
+
+    strcpy(cars[2].make_model_varient, "Ford F-150 Lariat");
+    cars[2].year = 2022;
+    cars[2].price = 7500000;
+    cars[2].mileage = 10000;
+
+    strcpy(cars[3].make_model_varient, "Tesla Model 3 Standard Range Plus");
+    cars[3].year = 2024;
+    cars[3].price = 7000000;
+    cars[3].mileage = 8000;
+
+    int choice;
+    while (1) {
+        printf("\n--- Menu ---\n");
+        printf("1. Insert Car\n");
+        printf("2. Display Cars\n");
+        printf("3. Search Car\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar(); 
+
+        switch (choice) {
+            case 1:
+                Insert(cars, &size);
+                break;
+            case 2:
+                display(cars, size);
+                break;
+            case 3:
+                search(cars, size);
+                break;
+            case 4:
+                printf("Exiting program.\n");
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+}
+
+void display(struct details cars[], int size) {
+    printf("\n--- Available Cars ---\n");
+    for (int i = 0; i < size; i++) {
+        printf("\nCar %d:\n", i + 1);
+        printf("Make/Model/Variant: %s\n", cars[i].make_model_varient);
+        printf("Year: %d\n", cars[i].year);
+        printf("Price: %d\n", cars[i].price);
+        printf("Mileage: %d\n", cars[i].mileage);
+    }
+}
+
+void Insert(struct details cars[], int *size) {
+    printf("\nEnter Make/Model/Variant: ");
+    fgets(cars[*size].make_model_varient, sizeof(cars[*size].make_model_varient), stdin);
+    cars[*size].make_model_varient[strcspn(cars[*size].make_model_varient, "\n")] = '\0'; 
+
+    printf("Enter Year: ");
+    scanf("%d", &cars[*size].year);
+
+    printf("Enter Price: ");
+    scanf("%d", &cars[*size].price);
+
+    printf("Enter Mileage: ");
+    scanf("%d", &cars[*size].mileage);
+    getchar(); 
+
+    (*size)++;
+    printf("Car added successfully!\n");
+}
+
+void search(struct details cars[], int size) {
+    char search[100];
+    printf("\nEnter Make/Model/Variant to search: ");
+    fgets(search, sizeof(search), stdin);
+    search[strcspn(search, "\n")] = '\0'; 
+
+    printf("\n--- Search Results ---\n");
+    int found = 0;
+    for (int i = 0; i < size; i++) {
+        if (strstr(cars[i].make_model_varient, search) != NULL) { 
+            printf("\nMake/Model/Variant: %s\n", cars[i].make_model_varient);
+            printf("Year: %d\n", cars[i].year);
+            printf("Price: %d\n", cars[i].price);
+            printf("Mileage: %d\n", cars[i].mileage);
+            found = 1;
+        }
+    }
+    if (!found) {
+        printf("No cars found matching '%s'.\n", search);
+    }
+}
